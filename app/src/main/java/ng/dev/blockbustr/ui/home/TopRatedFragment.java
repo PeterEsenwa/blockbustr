@@ -32,6 +32,7 @@ public class TopRatedFragment extends Fragment {
         moviesRecyclerView = root.findViewById(R.id.movies_recycler_view);
         layoutManager = new GridLayoutManager(getContext(), 2);
 
+
         ArrayList<MovieDetails> movies = new ArrayList<>();
         moviesAdapter = new MoviesAdapter(movies);
 
@@ -39,7 +40,6 @@ public class TopRatedFragment extends Fragment {
         moviesRecyclerView.setAdapter(moviesAdapter);
 
         topRatedViewModel.getMovies().observe(this, newMovies -> {
-            // update UI
             movies.clear();
             movies.addAll(newMovies);
             moviesAdapter.notifyDataSetChanged();

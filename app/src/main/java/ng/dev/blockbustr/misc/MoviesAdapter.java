@@ -1,12 +1,11 @@
 package ng.dev.blockbustr.misc;
 
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -30,18 +29,18 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     @Override
     public MoviesAdapter.MoviesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-//        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.my_text_view, parent, false);
-        return new MoviesViewHolder(new ImageView(parent.getContext()));
+        ConstraintLayout view = (ConstraintLayout) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.movie_item, parent, false);
+        return new MoviesViewHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(MoviesViewHolder holder, int position) {
-        holder.imageView.setImageBitmap(null);
-        Picasso.get().load(movies.get(position).getPosterPath())
-                .placeholder(R.color.colorSecondary)
-                .into(holder.imageView);
+    public void onBindViewHolder(@NonNull MoviesViewHolder holder, int position) {
+//        holder.imageView.setImageBitmap(null);
+//        Picasso.get().load(movies.get(position).getPosterPath())
+//                .placeholder(R.color.colorSecondary)
+//                .into(holder.imageView);
 //        Picasso.get().load(movies.get(position).getPosterPath()).into(holder.imageView);
 //        holder.textView.setText(movies.get(position).getTitle());
     }
@@ -52,11 +51,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     }
 
     static class MoviesViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+        ConstraintLayout constraintLayout;
 
-        MoviesViewHolder(ImageView v) {
+        MoviesViewHolder(ConstraintLayout v) {
             super(v);
-            imageView = v;
+            constraintLayout = v;
         }
     }
 }
