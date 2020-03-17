@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:id="@+id/mobile_navigation"
+		app:startDestination="@+id/nav_top_rated">
+
+	<fragment
+			android:id="@+id/nav_top_rated"
+			android:name="ng.dev.blockbustr.ui.home.TopRatedFragment"
+			android:label="@string/title_top_rated"
+			tools:layout="@layout/fragment_top_rated" />
+
+	<fragment
+			android:id="@+id/nav_most_viewed"
+			android:name="ng.dev.blockbustr.ui.dashboard.DashboardFragment"
+			android:label="@string/title_most_viewed"
+			tools:layout="@layout/fragment_dashboard" />
+
+	<fragment
+			android:id="@+id/nav_new_releases"
+			android:name="ng.dev.blockbustr.ui.notifications.NotificationsFragment"
+			android:label="@string/title_new_releases"
+			tools:layout="@layout/fragment_notifications" />
+</navigation>

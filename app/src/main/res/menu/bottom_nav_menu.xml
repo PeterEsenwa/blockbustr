@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item
+			android:id="@+id/nav_most_viewed"
+			android:icon="@drawable/ic_most_viewed"
+			android:title="@string/title_most_viewed" />
+
+	<item
+			android:id="@+id/nav_new_releases"
+			android:icon="@drawable/ic_new_releases"
+			android:title="@string/title_new_releases" />
+
+	<item
+			android:id="@+id/nav_top_rated"
+			android:icon="@drawable/ic_top_rated"
+			android:title="@string/title_top_rated" />
+
+</menu>
