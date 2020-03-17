@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import ng.dev.blockbustr.R;
 import ng.dev.blockbustr.models.MovieDetails;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
@@ -37,7 +38,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MoviesViewHolder holder, int position) {
-        Picasso.get().load(movies.get(position).getPosterPath()).into(holder.imageView);
+        holder.imageView.setImageBitmap(null);
+        Picasso.get().load(movies.get(position).getPosterPath())
+                .placeholder(R.color.colorSecondary)
+                .into(holder.imageView);
+//        Picasso.get().load(movies.get(position).getPosterPath()).into(holder.imageView);
+//        holder.textView.setText(movies.get(position).getTitle());
     }
 
     @Override
@@ -46,13 +52,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     }
 
     static class MoviesViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         ImageView imageView;
 
         MoviesViewHolder(ImageView v) {
             super(v);
             imageView = v;
         }
-
     }
 }

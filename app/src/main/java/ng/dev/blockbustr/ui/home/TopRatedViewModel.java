@@ -49,7 +49,6 @@ public class TopRatedViewModel extends ViewModel {
                     return null;
                 }
                 String responseBody = response.body() != null ? response.body().string() : null;
-                // ... do something with response
                 if (responseBody == null) {
                     return null;
                 }

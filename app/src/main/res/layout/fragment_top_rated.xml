@@ -12,7 +12,7 @@
 			android:fadeScrollbars="true"
 			android:scrollbarSize="0dp"
 			android:scrollbarStyle="outsideInset"
-			android:scrollbarThumbVertical="@drawable/ic_scroll_thumb"
+			android:scrollbarThumbVertical="@drawable/ic_scroller"
 			android:scrollbars="vertical"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"

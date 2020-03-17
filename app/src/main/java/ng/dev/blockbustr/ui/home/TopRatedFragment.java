@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import ng.dev.blockbustr.R;
 import ng.dev.blockbustr.misc.MoviesAdapter;
+import ng.dev.blockbustr.models.MovieDetails;
 
 public class TopRatedFragment extends Fragment {
 
@@ -29,16 +30,18 @@ public class TopRatedFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_top_rated, container, false);
 
         moviesRecyclerView = root.findViewById(R.id.movies_recycler_view);
-
-        moviesAdapter = new MoviesAdapter(new ArrayList<>());
         layoutManager = new GridLayoutManager(getContext(), 2);
+
+        ArrayList<MovieDetails> movies = new ArrayList<>();
+        moviesAdapter = new MoviesAdapter(movies);
 
         moviesRecyclerView.setLayoutManager(layoutManager);
         moviesRecyclerView.setAdapter(moviesAdapter);
 
-        topRatedViewModel.getMovies().observe(this, movies -> {
+        topRatedViewModel.getMovies().observe(this, newMovies -> {
             // update UI
-            moviesAdapter.updateMovies(movies);
+            movies.clear();
+            movies.addAll(newMovies);
             moviesAdapter.notifyDataSetChanged();
         });
 
