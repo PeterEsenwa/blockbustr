@@ -19,18 +19,14 @@ import ng.dev.blockbustr.models.MovieDetails;
 
 public class TopRatedFragment extends Fragment {
 
-    private TopRatedViewModel topRatedViewModel;
-
-    private RecyclerView moviesRecyclerView;
     private MoviesAdapter moviesAdapter;
-    private RecyclerView.LayoutManager layoutManager;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        topRatedViewModel = ViewModelProviders.of(this).get(TopRatedViewModel.class);
+        TopRatedViewModel topRatedViewModel = ViewModelProviders.of(this).get(TopRatedViewModel.class);
         View root = inflater.inflate(R.layout.fragment_top_rated, container, false);
 
-        moviesRecyclerView = root.findViewById(R.id.movies_recycler_view);
-        layoutManager = new GridLayoutManager(getContext(), 2);
+        RecyclerView moviesRecyclerView = root.findViewById(R.id.movies_recycler_view);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
 
 
         ArrayList<MovieDetails> movies = new ArrayList<>();
