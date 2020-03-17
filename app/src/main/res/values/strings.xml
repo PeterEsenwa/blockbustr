@@ -1,7 +1,9 @@
 <resources>
 	<string name="app_name">BlockBustr</string>
 	<string name="title_top_rated">Top Rated</string>
-	<string name="title_most_viewed">Most Viewed</string>
-	<string name="title_new_releases">New Releases</string>
+	<string name="title_most_viewed">Popular</string>
+	<string name="title_now_showing">Now Showing</string>
 	<string name="movie_poster">movie poster</string>
+	<string name="sort_by_date">Sort by Date</string>
+	<string name="sort_by_ratings">Sort by Ratings</string>
 </resources>

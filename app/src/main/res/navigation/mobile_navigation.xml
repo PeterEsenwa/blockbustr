@@ -3,24 +3,38 @@
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		xmlns:tools="http://schemas.android.com/tools"
 		android:id="@+id/mobile_navigation"
-		app:startDestination="@+id/nav_top_rated">
-	<!--	TODO: Change startDestination -->
+		app:startDestination="@+id/nav_most_viewed">
 
 	<fragment
 			android:id="@+id/nav_top_rated"
-			android:name="ng.dev.blockbustr.ui.home.TopRatedFragment"
+			android:name="ng.dev.blockbustr.ui.top_rated.TopRatedFragment"
 			android:label="@string/title_top_rated"
-			tools:layout="@layout/fragment_top_rated" />
+			tools:layout="@layout/fragment_top_rated">
+		<action
+				android:id="@+id/action_nav_top_rated_to_movie_details_placeholder"
+				app:destination="@id/movie_details_placeholder" />
+	</fragment>
 
 	<fragment
 			android:id="@+id/nav_most_viewed"
-			android:name="ng.dev.blockbustr.ui.dashboard.DashboardFragment"
+			android:name="ng.dev.blockbustr.ui.most_viewed.MostViewedFragment"
 			android:label="@string/title_most_viewed"
-			tools:layout="@layout/fragment_dashboard" />
+			tools:layout="@layout/fragment_most_viewed">
+		<action
+				android:id="@+id/action_nav_most_viewed_to_movie_details_placeholder"
+				app:destination="@id/movie_details_placeholder"
+				app:enterAnim="@anim/slide_in_right"
+				app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+	</fragment>
 
 	<fragment
-			android:id="@+id/nav_new_releases"
-			android:name="ng.dev.blockbustr.ui.notifications.NotificationsFragment"
-			android:label="@string/title_new_releases"
-			tools:layout="@layout/fragment_notifications" />
+			android:id="@+id/nav_now_showing"
+			android:name="ng.dev.blockbustr.ui.new_releases.NowShowingFragment"
+			android:label="@string/title_now_showing"
+			tools:layout="@layout/fragment_now_showing">
+		<action
+				android:id="@+id/action_nav_new_releases_to_movie_details_placeholder2"
+				app:destination="@id/movie_details_placeholder" />
+	</fragment>
+	<fragment android:id="@+id/movie_details_placeholder" />
 </navigation>

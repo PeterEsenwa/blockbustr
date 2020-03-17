@@ -2,8 +2,10 @@ package ng.dev.blockbustr.misc;
 
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ng.dev.blockbustr.R;
 import ng.dev.blockbustr.models.MovieDetails;
@@ -32,11 +35,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         return new MoviesViewHolder(view);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull MoviesViewHolder holder, int position) {
-        int leftRightPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25 / 2, holder.constraintLayout.getResources().getDisplayMetrics());
-        int topDownPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8.5f, holder.constraintLayout.getResources().getDisplayMetrics());
+        int leftRightPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25 / 2,
+                holder.constraintLayout.getResources().getDisplayMetrics());
+        int topDownPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8.5f,
+                holder.constraintLayout.getResources().getDisplayMetrics());
 
         int column = position % 2;
         int right = 0;
@@ -56,11 +60,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
             top = topDownPadding;
         }
 
-        GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) holder.constraintLayout.getLayoutParams();
+        GridLayoutManager.LayoutParams params =
+                (GridLayoutManager.LayoutParams) holder.constraintLayout.getLayoutParams();
         params.setMargins(left, top, right, bottom);
         holder.constraintLayout.setLayoutParams(params);
 
-        Picasso.get().load(movies.get(position).getPosterPath())
+        MovieDetails movie = movies.get(position);
+        holder.movie = movie;
+        Picasso.get().load(movie.getPosterPath())
                 .placeholder(R.color.colorSecondary)
                 .into(holder.posterImageView);
 
@@ -74,14 +81,43 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         return movies == null ? 0 : movies.size();
     }
 
-    static class MoviesViewHolder extends RecyclerView.ViewHolder {
+    public void sortByDate() {
+        ArrayList<MovieDetails> tempMovies = new ArrayList<>(movies);
+        Collections.sort(tempMovies, MovieDetails.releaseDateComparator());
+
+        movies.clear();
+        movies.addAll(tempMovies);
+
+        notifyDataSetChanged();
+    }
+
+    public void sortByRatings() {
+        ArrayList<MovieDetails> tempMovies = new ArrayList<>(movies);
+        Collections.sort(tempMovies, MovieDetails.ratingsComparator());
+
+        movies.clear();
+        movies.addAll(tempMovies);
+
+        notifyDataSetChanged();
+    }
+
+    static class MoviesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ConstraintLayout constraintLayout;
         ImageView posterImageView;
+        MovieDetails movie;
 
         MoviesViewHolder(ConstraintLayout v) {
             super(v);
+            itemView.setOnClickListener(this);
             constraintLayout = v;
             posterImageView = constraintLayout.findViewById(R.id.movie_poster);
         }
+
+        @Override
+        public void onClick(View view) {
+
+            Toast.makeText(constraintLayout.getContext(), movie.getTitle(), Toast.LENGTH_LONG).show();
+        }
+
     }
 }

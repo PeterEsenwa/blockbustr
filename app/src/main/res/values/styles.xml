@@ -2,11 +2,11 @@
 
 	<!-- Base application theme. -->
 	<style name="AppTheme" parent="Theme.AppCompat.Light">
-		<!-- Customize your theme here. -->
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
 
+		<item name="android:actionOverflowButtonStyle">@style/ActionButton.Overflow.Icon</item>
 		<item name="actionBarStyle">@style/AppBarTheme</item>
 		<item name="android:windowBackground">@drawable/splash_screen</item>
 	</style>
@@ -22,5 +22,9 @@
 		<item name="android:textSize">20sp</item>
 		<item name="android:textAllCaps">true</item>
 		<item name="android:fontFamily">@font/josefin_sans_bold</item>
+	</style>
+
+	<style name="ActionButton.Overflow.Icon" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+		<item name="android:tint">@color/colorAccent</item>
 	</style>
 </resources>

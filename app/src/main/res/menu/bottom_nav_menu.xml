@@ -7,9 +7,9 @@
 			android:title="@string/title_most_viewed" />
 
 	<item
-			android:id="@+id/nav_new_releases"
+			android:id="@+id/nav_now_showing"
 			android:icon="@drawable/ic_new_releases"
-			android:title="@string/title_new_releases" />
+			android:title="@string/title_now_showing" />
 
 	<item
 			android:id="@+id/nav_top_rated"

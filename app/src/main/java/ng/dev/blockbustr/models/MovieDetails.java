@@ -3,6 +3,7 @@ package ng.dev.blockbustr.models;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
@@ -130,4 +131,28 @@ public class MovieDetails {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         this.releaseDate = dateFormat.parse(releaseDate);
     }
+
+    public static Comparator<MovieDetails> releaseDateComparator() {
+        return (movieOne, movieTwo) -> {
+            if (movieOne == null || movieTwo == null || movieOne.getReleaseDate() == null || movieTwo.getReleaseDate() == null) {
+                return 0;
+            }
+            return movieTwo.getReleaseDate().compareTo(movieOne.getReleaseDate());
+        };
+    }
+
+    public static Comparator<MovieDetails> ratingsComparator() {
+        return (movieOne, movieTwo) -> {
+            if (movieOne == null || movieTwo == null || movieOne.getVoteAverage() == null || movieTwo.getVoteAverage() == null) {
+                return 0;
+            }
+            return movieTwo.getVoteAverage().compareTo(movieOne.getVoteAverage());
+        };
+    }
+
+//    static Comparator<MovieDetails> getAttribute2Comparator() {
+//        return new Comparator<MovieDetails>() {
+//            // compare using attribute 2
+//        };
+//    }
 }

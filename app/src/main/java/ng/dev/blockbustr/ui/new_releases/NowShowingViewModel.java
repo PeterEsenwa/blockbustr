@@ -1,4 +1,4 @@
-package ng.dev.blockbustr.ui.home;
+package ng.dev.blockbustr.ui.new_releases;
 
 import android.os.AsyncTask;
 
@@ -7,20 +7,17 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import ng.dev.blockbustr.models.MovieDetails;
 import ng.dev.blockbustr.utils.JsonUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Request.Builder;
 import okhttp3.Response;
 
-@SuppressWarnings("WeakerAccess")
-public class TopRatedViewModel extends ViewModel {
+public class NowShowingViewModel extends ViewModel {
+
     private static MutableLiveData<ArrayList<MovieDetails>> movies;
 
     LiveData<ArrayList<MovieDetails>> getMovies() {
@@ -42,15 +39,18 @@ public class TopRatedViewModel extends ViewModel {
         @Override
         protected ArrayList<MovieDetails> doInBackground(Void... strings) {
             OkHttpClient client = new OkHttpClient();
-            Request request = new Builder().url("https://api.themoviedb.org/3/movie/popular?api_key=12f065928e6fa02c8db32b3c15005d1c&language=en-US&page=1").build();
 
+            Request request = new Request.Builder()
+                    .url("https://api.themoviedb.org/3/movie/now_playing?api_key=12f065928e6fa02c8db32b3c15005d1c" +
+                            "&language=en-US&page=1")
+                    .build();
             try (Response response = client.newCall(request).execute()) {
                 if (!response.isSuccessful()) {
-                    return null;
+                    return tempMovies;
                 }
                 String responseBody = response.body() != null ? response.body().string() : null;
                 if (responseBody == null) {
-                    return null;
+                    return tempMovies;
                 }
 
                 JSONArray respMovies = JsonUtils.getMoviesArray(responseBody);
@@ -60,12 +60,10 @@ public class TopRatedViewModel extends ViewModel {
                 }
 
                 return tempMovies;
-            } catch (IOException e) {
-                // ... handle IO exception
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            return null;
+            return tempMovies;
         }
 
         @Override

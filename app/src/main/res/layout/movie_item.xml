@@ -4,7 +4,10 @@
 		android:id="@+id/item_holder"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:adjustViewBounds="true">
+		android:adjustViewBounds="true"
+		android:clipToPadding="false"
+		android:outlineProvider="bounds"
+		android:translationZ="4dp">
 
 	<ImageView
 			android:id="@+id/movie_poster"
