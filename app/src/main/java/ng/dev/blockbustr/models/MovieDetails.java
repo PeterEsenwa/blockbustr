@@ -3,8 +3,10 @@ package ng.dev.blockbustr.models;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class MovieDetails {
@@ -12,7 +14,23 @@ public class MovieDetails {
     public MovieDetails() {
     }
 
-    public MovieDetails(Integer id, String originalTitle, String title, String overview, Double popularity, Integer voteCount, Integer voteAverage, String posterPath, String backdropPath, String releaseDate, String originalLanguage) throws ParseException {
+    private ArrayList<Genre> genres = new ArrayList<>();
+
+    private Integer id;
+    private String originalTitle;
+    private String title;
+    private String overview;
+    private Double popularity;
+    private Integer voteCount;
+    private Integer voteAverage;
+    private String posterPath;
+    private String backdropPath;
+    private Date releaseDate;
+    private String originalLanguage;
+
+    public MovieDetails(Integer id, String originalTitle, String title, String overview, Double popularity,
+                        Integer voteCount, Integer voteAverage, String posterPath, String backdropPath,
+                        String releaseDate, String originalLanguage) throws ParseException {
         this.id = id;
         this.originalTitle = originalTitle;
         this.title = title;
@@ -26,19 +44,6 @@ public class MovieDetails {
         this.releaseDate = dateFormat.parse(releaseDate);
         this.originalLanguage = originalLanguage;
     }
-
-    private Integer id;
-    private String originalTitle;
-    private String title;
-    private String overview;
-    private Double popularity;
-    private Integer voteCount;
-    private Integer voteAverage;
-    private String posterPath;
-    private String backdropPath;
-    private Date releaseDate;
-    private String originalLanguage;
-//    private List<Integer> genreIds = null;
 //    private Boolean video;
 //    private Boolean adult;
 //    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -148,6 +153,17 @@ public class MovieDetails {
             }
             return movieTwo.getVoteAverage().compareTo(movieOne.getVoteAverage());
         };
+    }
+
+    public ArrayList<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Integer> genreIds) {
+        for (Integer genreId : genreIds) {
+            Genre g = Genre.allGenres.get(Genre.allGenres.indexOf(new Genre(genreId, "")));
+            this.genres.add(g);
+        }
     }
 
 //    static Comparator<MovieDetails> getAttribute2Comparator() {

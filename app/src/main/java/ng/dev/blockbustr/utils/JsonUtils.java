@@ -6,12 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 import ng.dev.blockbustr.models.MovieDetails;
@@ -32,9 +28,19 @@ public class JsonUtils {
             movieDetails.setTitle(movieObject.getString("title"));
             movieDetails.setOriginalTitle(movieObject.getString("original_language"));
             movieDetails.setOverview(movieObject.getString("overview"));
-            movieDetails.setPosterPath(String.format("https://image.tmdb.org/t/p/w500%s", movieObject.getString("poster_path")));
+            movieDetails.setPosterPath("https://image.tmdb.org/t/p/w500"
+                    + movieObject.getString("poster_path"));
+            movieDetails.setBackdropPath("https://image.tmdb.org/t/p/original"
+                    + movieObject.getString("backdrop_path"));
 
             movieDetails.setReleaseDate(movieObject.getString("release_date"));
+
+            JSONArray genreIdsJSON = movieObject.getJSONArray("genre_ids");
+            ArrayList<Integer> genreIds = new ArrayList<>();
+            for (int i = 0; i < genreIdsJSON.length(); i++) {
+                genreIds.add(genreIdsJSON.getInt(i));
+            }
+            movieDetails.setGenres(genreIds);
 
         } catch (JSONException | ParseException e) {
             Log.d(JsonUtils.class.getSimpleName(), Objects.requireNonNull(e.getMessage()));

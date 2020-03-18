@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,8 +20,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import ng.dev.blockbustr.MainActivity;
 import ng.dev.blockbustr.R;
 import ng.dev.blockbustr.models.MovieDetails;
+import ng.dev.blockbustr.ui.movie_details.MovieDetailsViewModel;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
     private ArrayList<MovieDetails> movies;
@@ -70,10 +75,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         Picasso.get().load(movie.getPosterPath())
                 .placeholder(R.color.colorSecondary)
                 .into(holder.posterImageView);
-
-
-//        Picasso.get().load(movies.get(position).getPosterPath()).into(holder.imageView);
-//        holder.textView.setText(movies.get(position).getTitle());
     }
 
     @Override
@@ -115,9 +116,32 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
 
         @Override
         public void onClick(View view) {
+            MainActivity mainActivity = (MainActivity) itemView.getContext();
+            MovieDetailsViewModel movieDetailsVM = ViewModelProviders.of(mainActivity).get(MovieDetailsViewModel.class);
 
-            Toast.makeText(constraintLayout.getContext(), movie.getTitle(), Toast.LENGTH_LONG).show();
+            movieDetailsVM.setCurrentMovie(movie);
+
+            NavController navController = Navigation.findNavController(itemView);
+            NavDestination currentDestination = navController.getCurrentDestination();
+            if (currentDestination != null) {
+                int currentID = currentDestination.getId();
+
+                switch (currentID) {
+                    case (R.id.nav_most_viewed): {
+                        navController.navigate(R.id.action_nav_most_viewed_to_movie_details);
+                        break;
+                    }
+                    case (R.id.nav_now_showing): {
+                        navController.navigate(R.id.action_nav_now_showing_to_movie_details);
+                        break;
+                    }
+                    case (R.id.nav_top_rated): {
+                        navController.navigate(R.id.action_nav_top_rated_to_movie_details);
+                        break;
+                    }
+                }
+
+            }
         }
-
     }
 }
