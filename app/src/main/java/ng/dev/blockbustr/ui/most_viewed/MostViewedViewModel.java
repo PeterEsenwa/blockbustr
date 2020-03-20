@@ -34,7 +34,7 @@ public class MostViewedViewModel extends ViewModel {
 
     static class RetrieveMovies extends AsyncTask<Void, Void, ArrayList<MovieDetails>> {
 
-        private ArrayList<MovieDetails> tempMovies = new ArrayList<>();
+        final private ArrayList<MovieDetails> tempMovies = new ArrayList<>();
 
         @Override
         protected ArrayList<MovieDetails> doInBackground(Void... strings) {

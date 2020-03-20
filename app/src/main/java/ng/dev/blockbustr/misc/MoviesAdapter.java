@@ -26,7 +26,7 @@ import ng.dev.blockbustr.models.MovieDetails;
 import ng.dev.blockbustr.ui.movie_details.MovieDetailsViewModel;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
-    private ArrayList<MovieDetails> movies;
+    final private ArrayList<MovieDetails> movies;
 
     public MoviesAdapter(ArrayList<MovieDetails> movies) {
         this.movies = movies;
@@ -92,19 +92,19 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         notifyDataSetChanged();
     }
 
-    public void sortByRatings() {
-        ArrayList<MovieDetails> tempMovies = new ArrayList<>(movies);
-        Collections.sort(tempMovies, MovieDetails.ratingsComparator());
-
-        movies.clear();
-        movies.addAll(tempMovies);
-
-        notifyDataSetChanged();
-    }
+//    public void sortByRatings() {
+//        ArrayList<MovieDetails> tempMovies = new ArrayList<>(movies);
+//        Collections.sort(tempMovies, MovieDetails.ratingsComparator());
+//
+//        movies.clear();
+//        movies.addAll(tempMovies);
+//
+//        notifyDataSetChanged();
+//    }
 
     static class MoviesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ConstraintLayout constraintLayout;
-        ImageView posterImageView;
+        final ConstraintLayout constraintLayout;
+        final ImageView posterImageView;
         MovieDetails movie;
 
         MoviesViewHolder(ConstraintLayout v) {

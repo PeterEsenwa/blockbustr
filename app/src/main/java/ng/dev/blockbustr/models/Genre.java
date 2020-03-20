@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Genre {
-    public static ArrayList<Genre> allGenres = new ArrayList<>(
+    final static ArrayList<Genre> allGenres = new ArrayList<>(
             Arrays.asList(
                     new Genre(28, "Action"),
                     new Genre(12, "Adventure"),

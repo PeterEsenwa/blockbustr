@@ -12,7 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    AppBarConfiguration appBarConfiguration;
+    private AppBarConfiguration appBarConfiguration;
     private BottomNavigationView navView;
 
     @Override
@@ -42,9 +42,7 @@ public class MainActivity extends AppCompatActivity {
         if (navView.getVisibility() == View.VISIBLE && navView.getAlpha() == 1f) {
             navView.animate()
                     .alpha(0f)
-                    .withEndAction(() -> {
-                        navView.setVisibility(View.GONE);
-                    })
+                    .withEndAction(() -> navView.setVisibility(View.GONE))
                     .setDuration(400);
         }
     }

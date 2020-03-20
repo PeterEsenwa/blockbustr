@@ -5,8 +5,11 @@
 	<string name="title_now_showing">Now Showing</string>
 	<string name="movie_poster">movie poster</string>
 	<string name="sort_by_date">Sort by Date</string>
-	<string name="sort_by_ratings">Sort by Ratings</string>
 	<string name="movie_ratings">movie ratings</string>
 	<string name="ratings_text">RATINGS</string>
 	<string name="release_date">Released: %s</string>
+	<string name="now_playing_api_url"><![CDATA[https://api.themoviedb.org/3/movie/now_playing?api_key=%s&language=en-US&page=1]]></string>
+	<!--	insert the movie DB api key here   -->
+	<!--	TODO: Remove api_key-->
+	<string name="api_key">12f065928e6fa02c8db32b3c15005d1c</string>
 </resources>
