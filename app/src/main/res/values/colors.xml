@@ -2,6 +2,7 @@
 <resources>
 	<!--	<color name="colorPrimary">#FFFFFF</color>-->
 	<color name="colorPrimary">#1DB760</color>
+	<color name="colorPrimaryTranslucent">#CC1DB760</color>
 	<color name="colorPrimaryLight">#65e79d</color>
 	<color name="colorPrimaryDark">#116e3a</color>
 	<color name="colorSecondary">#ffffff</color>

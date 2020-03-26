@@ -8,9 +8,10 @@
 	<string name="movie_ratings">movie ratings</string>
 	<string name="ratings_text">RATINGS</string>
 	<string name="release_date">Released: %s</string>
-	<!--	insert a theMovieDB api key here   -->
-	<string name="api_key"><!--	TODO: Insert api_key--></string>
+	<!--	insert a theMovieDB api key here   --><!--	TODO: Insert api_key-->
+	<string name="api_key">12f065928e6fa02c8db32b3c15005d1c</string>
 	<string name="most_viewed_api_url"><![CDATA[https://api.themoviedb.org/3/movie/popular?api_key=%s&language=en-US&page=1]]></string>
 	<string name="now_playing_api_url"><![CDATA[https://api.themoviedb.org/3/movie/now_playing?api_key=%s&language=en-US&page=1]]></string>
 	<string name="top_rated_api_url"><![CDATA[https://api.themoviedb.org/3/movie/top_rated?api_key=%s&language=en-US&page=1]]></string>
+	<string name="watch_trailer">Watch Trailer</string>
 </resources>
