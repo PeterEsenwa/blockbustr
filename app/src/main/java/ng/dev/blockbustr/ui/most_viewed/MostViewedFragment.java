@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +26,7 @@ public class MostViewedFragment extends Fragment {
     private MoviesAdapter moviesAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        MostViewedViewModel mostViewedViewModel = ViewModelProviders.of(this).get(MostViewedViewModel.class);
+        MostViewedViewModel mostViewedViewModel = new ViewModelProvider(this).get(MostViewedViewModel.class);
         View root = inflater.inflate(R.layout.fragment_most_viewed, container, false);
 
         RecyclerView recyclerView = root.findViewById(R.id.most_viewed_movies_rv);
@@ -38,7 +38,7 @@ public class MostViewedFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(moviesAdapter);
 
-        mostViewedViewModel.getMovies().observe(this, newMovies -> {
+        mostViewedViewModel.getMovies().observe(getViewLifecycleOwner(), newMovies -> {
             movies.clear();
             movies.addAll(newMovies);
             moviesAdapter.notifyDataSetChanged();

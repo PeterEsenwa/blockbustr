@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -42,7 +42,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
 
     @Override
     public void onBindViewHolder(@NonNull MoviesViewHolder holder, int position) {
-        int leftRightPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25 / 2,
+        int leftRightPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12.5f,
                 holder.constraintLayout.getResources().getDisplayMetrics());
         int topDownPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8.5f,
                 holder.constraintLayout.getResources().getDisplayMetrics());
@@ -117,7 +117,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         @Override
         public void onClick(View view) {
             MainActivity mainActivity = (MainActivity) itemView.getContext();
-            MovieDetailsViewModel movieDetailsVM = ViewModelProviders.of(mainActivity).get(MovieDetailsViewModel.class);
+            MovieDetailsViewModel movieDetailsVM = new ViewModelProvider(mainActivity).get(MovieDetailsViewModel.class);
 
             movieDetailsVM.setCurrentMovie(movie);
 

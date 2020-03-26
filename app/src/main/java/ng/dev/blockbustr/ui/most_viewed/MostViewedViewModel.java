@@ -1,24 +1,35 @@
 package ng.dev.blockbustr.ui.most_viewed;
 
+import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 
+import ng.dev.blockbustr.R;
 import ng.dev.blockbustr.models.MovieDetails;
 import ng.dev.blockbustr.utils.JsonUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MostViewedViewModel extends ViewModel {
+public class MostViewedViewModel extends AndroidViewModel {
 
     private static MutableLiveData<ArrayList<MovieDetails>> movies;
+    private static String mostViewedApiURL;
+    private static String apiKey;
+
+    public MostViewedViewModel(@NonNull Application application) {
+        super(application);
+        mostViewedApiURL = getApplication().getResources().getString(R.string.most_viewed_api_url);
+        apiKey = getApplication().getResources().getString(R.string.api_key);
+    }
 
     LiveData<ArrayList<MovieDetails>> getMovies() {
         if (movies == null) {
@@ -40,10 +51,7 @@ public class MostViewedViewModel extends ViewModel {
         protected ArrayList<MovieDetails> doInBackground(Void... strings) {
             OkHttpClient client = new OkHttpClient();
 
-            Request request = new Request.Builder()
-                    .url("https://api.themoviedb.org/3/movie/popular?api_key=12f065928e6fa02c8db32b3c15005d1c" +
-                            "&language=en-US&page=1")
-                    .build();
+            Request request = new Request.Builder().url(String.format(mostViewedApiURL, apiKey)).build();
             try (Response response = client.newCall(request).execute()) {
                 if (!response.isSuccessful()) {
                     return tempMovies;

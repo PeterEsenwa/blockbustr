@@ -14,7 +14,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -38,7 +38,7 @@ public class MovieDetailsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup group, @Nullable Bundle bundle) {
-        MovieDetailsViewModel movieDetailsVM = ViewModelProviders.of(this).get(MovieDetailsViewModel.class);
+        MovieDetailsViewModel movieDetailsVM = new ViewModelProvider(this).get(MovieDetailsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_movie_details, group, false);
         backdropImageView = root.findViewById(R.id.movie_backdrop);
         overviewTextView = root.findViewById(R.id.movie_overview);
@@ -46,7 +46,7 @@ public class MovieDetailsFragment extends Fragment {
         dateTextView = root.findViewById(R.id.date_tv);
         genresChipGroup = root.findViewById(R.id.genres_holder);
 
-        movieDetailsVM.getCurrentMovie().observe(this, movieDetails -> {
+        movieDetailsVM.getCurrentMovie().observe(getViewLifecycleOwner(), movieDetails -> {
             setTitle(movieDetails.getTitle());
             addGenreChips(movieDetails.getGenres());
 

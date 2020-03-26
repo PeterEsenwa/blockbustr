@@ -22,12 +22,12 @@ import okhttp3.Response;
 public class NowShowingViewModel extends AndroidViewModel {
 
     private static MutableLiveData<ArrayList<MovieDetails>> movies;
-    private static String nowPlayingApi;
+    private static String nowPlayingApiURL;
     private static String apiKey;
 
     public NowShowingViewModel(@NonNull Application application) {
         super(application);
-        nowPlayingApi = getApplication().getResources().getString(R.string.now_playing_api_url);
+        nowPlayingApiURL = getApplication().getResources().getString(R.string.now_playing_api_url);
         apiKey = getApplication().getResources().getString(R.string.api_key);
     }
 
@@ -51,9 +51,7 @@ public class NowShowingViewModel extends AndroidViewModel {
         protected ArrayList<MovieDetails> doInBackground(Void... strings) {
             OkHttpClient client = new OkHttpClient();
 
-            Request request = new Request.Builder()
-                    .url(String.format(nowPlayingApi, apiKey))
-                    .build();
+            Request request = new Request.Builder().url(String.format(nowPlayingApiURL, apiKey)).build();
             try (Response response = client.newCall(request).execute()) {
                 if (!response.isSuccessful()) {
                     return tempMovies;

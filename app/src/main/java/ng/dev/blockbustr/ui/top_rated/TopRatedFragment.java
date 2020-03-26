@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +26,7 @@ public class TopRatedFragment extends Fragment {
     private MoviesAdapter moviesAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        TopRatedViewModel topRatedViewModel = ViewModelProviders.of(this).get(TopRatedViewModel.class);
+        TopRatedViewModel topRatedViewModel = new ViewModelProvider(this).get(TopRatedViewModel.class);
         View root = inflater.inflate(R.layout.fragment_top_rated, container, false);
 
         RecyclerView recyclerView = root.findViewById(R.id.top_rated_movies_rv);
@@ -38,7 +38,7 @@ public class TopRatedFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(moviesAdapter);
 
-        topRatedViewModel.getMovies().observe(this, newMovies -> {
+        topRatedViewModel.getMovies().observe(getViewLifecycleOwner(), newMovies -> {
             movies.clear();
             movies.addAll(newMovies);
             moviesAdapter.notifyDataSetChanged();
