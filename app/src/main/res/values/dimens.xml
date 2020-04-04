@@ -1,5 +1,36 @@
 <resources>
-	<!-- Default screen margins, per the Android Design guidelines. -->
-	<dimen name="activity_horizontal_margin">16dp</dimen>
-	<dimen name="activity_vertical_margin">16dp</dimen>
+	<dimen name="match_constraints">0dp</dimen>
+
+	<dimen name="portrait_backdrop_height">200dp</dimen>
+
+	<dimen name="ratings_square_size">40dp</dimen>
+
+	<dimen name="font_size_12sp">12sp</dimen>
+	<dimen name="font_size_16sp">16sp</dimen>
+	<dimen name="font_size_18sp">18sp</dimen>
+	<dimen name="font_size_20sp">20sp</dimen>
+
+	<dimen name="rating_tv_marginTop_portrait">4dp</dimen>
+
+	<dimen name="genres_chipgroup_h_margin_portrait">8dp</dimen>
+	<dimen name="genres_chipgroup_marginTop_portrait">16dp</dimen>
+	<dimen name="genres_chipgroup_h_spacing_portrait">8dp</dimen>
+	<dimen name="genres_chipgroup_v_spacing_portrait">4dp</dimen>
+
+	<dimen name="movie_backdrop_marginStart_landscape">8dp</dimen>
+	<dimen name="movie_backdrop_marginBottom_landscape">8dp</dimen>
+
+	<dimen name="movie_overview_marginTop_portrait">8dp</dimen>
+	<dimen name="movie_overview_marginEnd_portrait">12dp</dimen>
+	<dimen name="movie_overview_h_margin_landscape">8dp</dimen>
+
+	<dimen name="date_tv_marginBottom_landscape">16dp</dimen>
+	<dimen name="date_tv_marginTop_portrait">8dp</dimen>
+	<dimen name="date_tv_marginTop_landscape">8dp</dimen>
+	<dimen name="genres_chipgroup_h_spacing_landscape">12dp</dimen>
+	<dimen name="genres_chipgroup_v_spacing_landscape">6dp</dimen>
+	<dimen name="genres_chipgroup_h_margin_landscape">16dp</dimen>
+	<dimen name="genres_chipgroup_tools_height">80dp</dimen>
+	<dimen name="font_size_24sp">24sp</dimen>
+
 </resources>

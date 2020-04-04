@@ -26,8 +26,8 @@ public class TopRatedViewModel extends AndroidViewModel {
 
     public TopRatedViewModel(@NonNull Application application) {
         super(application);
-        topRatedApiURL = getApplication().getResources().getString(R.string.top_rated_api_url);
-        apiKey = getApplication().getResources().getString(R.string.api_key);
+        topRatedApiURL = application.getString(R.string.top_rated_api_url);
+        apiKey = application.getString(R.string.api_key);
     }
 
     LiveData<ArrayList<MovieDetails>> getMovies() {
@@ -44,7 +44,7 @@ public class TopRatedViewModel extends AndroidViewModel {
 
     static class RetrieveMovies extends AsyncTask<Void, Void, ArrayList<MovieDetails>> {
 
-        private ArrayList<MovieDetails> tempMovies = new ArrayList<>();
+        private final ArrayList<MovieDetails> tempMovies = new ArrayList<>();
 
         @Override
         protected ArrayList<MovieDetails> doInBackground(Void... strings) {
@@ -60,7 +60,7 @@ public class TopRatedViewModel extends AndroidViewModel {
                     return tempMovies;
                 }
 
-                JSONArray respMovies = JsonUtils.getMoviesArray(responseBody);
+                JSONArray respMovies = JsonUtils.getTMDB_ResponseArray(responseBody);
 
                 for (int i = 0; i < respMovies.length(); i++) {
                     tempMovies.add(JsonUtils.parseMovieDetails(respMovies.getJSONObject(i)));

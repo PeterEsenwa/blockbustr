@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         navView = findViewById(R.id.nav_view);
 
         appBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_top_rated, R.id.nav_most_viewed,
-                R.id.nav_now_showing).build();
+                R.id.nav_now_showing, R.id.nav_favourites).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {

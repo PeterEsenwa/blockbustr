@@ -1,136 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		xmlns:tools="http://schemas.android.com/tools"
-		android:id="@+id/movie_details_layout"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:background="@color/colorSecondary"
-		android:orientation="vertical">
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-	<ImageView
-			android:id="@+id/movie_backdrop"
-			android:layout_width="0dp"
-			android:layout_height="200dp"
-			android:adjustViewBounds="true"
-			android:contentDescription="@string/movie_poster"
-			android:scaleType="centerCrop"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			tools:layout_height="400dp" />
 
-	<ImageButton
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/round_btn_background"
-			android:backgroundTint="@color/colorPrimary"
-			android:contentDescription="@string/watch_trailer"
-			android:src="@drawable/ic_play_circle_outline_black_32dp"
-			app:layout_constraintBottom_toBottomOf="@+id/movie_backdrop"
-			app:layout_constraintEnd_toEndOf="@+id/movie_backdrop"
-			app:layout_constraintStart_toStartOf="@+id/movie_backdrop"
-			app:layout_constraintTop_toTopOf="@+id/movie_backdrop" />
-
-	<androidx.constraintlayout.widget.Barrier
-			android:id="@+id/backdrop_barrier"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			app:barrierDirection="bottom"
-			app:constraint_referenced_ids="movie_backdrop" />
-
-	<androidx.constraintlayout.widget.Guideline
-			android:id="@+id/ver_content_guide"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+	<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/movie_details_layout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:animateLayoutChanges="true"
+			android:isScrollContainer="true"
 			android:orientation="vertical"
-			app:layout_constraintGuide_percent=".045" />
+			android:scrollbars="vertical"
+			android:verticalScrollbarPosition="defaultPosition"
+			app:layout_scrollFlags="scroll">
 
-	<TextView
-			android:id="@+id/movie_overview"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="8dp"
-			android:layout_marginEnd="12dp"
-			android:ellipsize="end"
-			android:fontFamily="@font/josefin_sans_italic"
-			android:maxLines="15"
-			android:textColor="@android:color/primary_text_light_nodisable"
-			android:textSize="20sp"
-			android:typeface="sans"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toStartOf="@+id/rating_tv"
-			app:layout_constraintStart_toStartOf="@+id/ver_content_guide"
-			app:layout_constraintTop_toBottomOf="@id/backdrop_barrier"
-			app:layout_constraintVertical_bias="0.0" />
+		<ImageView
+				android:id="@+id/movie_backdrop"
+				android:layout_width="@dimen/match_constraints"
+				android:layout_height="@dimen/portrait_backdrop_height"
+				android:adjustViewBounds="true"
+				android:contentDescription="@string/movie_poster"
+				android:scaleType="centerCrop"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:layout_height="@dimen/portrait_backdrop_height" />
 
-	<androidx.constraintlayout.widget.Barrier
-			android:id="@+id/ratings_barrier"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			app:barrierDirection="end"
-			app:constraint_referenced_ids="ratings"
-			tools:layout_editor_absoluteX="298dp"
-			tools:layout_editor_absoluteY="651dp" />
+		<ImageButton
+				android:id="@+id/watch_main_trailer"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/round_btn_background"
+				android:backgroundTint="@color/colorPrimary"
+				android:contentDescription="@string/watch_trailer"
+				android:src="@drawable/ic_play_circle_outline_black_32dp"
+				android:visibility="gone"
+				app:layout_constraintBottom_toBottomOf="@+id/movie_backdrop"
+				app:layout_constraintEnd_toEndOf="@+id/movie_backdrop"
+				app:layout_constraintStart_toStartOf="@+id/movie_backdrop"
+				app:layout_constraintTop_toTopOf="@+id/movie_backdrop" />
 
+		<androidx.constraintlayout.widget.Barrier
+				android:id="@+id/backdrop_barrier"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:barrierDirection="bottom"
+				app:constraint_referenced_ids="movie_backdrop" />
 
-	<TextView
-			android:id="@+id/ratings"
-			android:layout_width="40dp"
-			android:layout_height="40dp"
-			android:background="@color/colorPrimary"
-			android:contentDescription="@string/movie_ratings"
-			android:fontFamily="@font/josefin_sans_bold"
-			android:gravity="center"
-			android:scaleType="centerCrop"
-			android:textAlignment="center"
-			android:textColor="@color/colorSecondary"
-			android:textSize="18sp"
-			android:textStyle="bold"
-			android:typeface="sans"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.95"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="@+id/movie_overview"
-			tools:layout_height="40dp"
-			tools:layout_width="40dp"
-			tools:text="7" />
+		<androidx.constraintlayout.widget.Guideline
+				android:id="@+id/ver_content_guide"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				app:layout_constraintGuide_percent=".045" />
 
-	<TextView
-			android:id="@+id/rating_tv"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="4dp"
-			android:fontFamily="@font/josefin_sans_semibold"
-			android:text="@string/ratings_text"
-			android:textSize="12sp"
-			app:layout_constraintEnd_toEndOf="@+id/ratings"
-			app:layout_constraintStart_toStartOf="@+id/ratings"
-			app:layout_constraintTop_toBottomOf="@+id/ratings" />
+		<TextView
+				android:id="@+id/movie_overview"
+				android:layout_width="@dimen/match_constraints"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/movie_overview_marginTop_portrait"
+				android:layout_marginEnd="@dimen/movie_overview_marginEnd_portrait"
+				android:fontFamily="@font/josefin_sans_italic"
+				android:textColor="@android:color/primary_text_light_nodisable"
+				android:textSize="@dimen/font_size_20sp"
+				android:typeface="sans"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toStartOf="@+id/rating_tv"
+				app:layout_constraintStart_toStartOf="@+id/ver_content_guide"
+				app:layout_constraintTop_toBottomOf="@id/backdrop_barrier"
+				app:layout_constraintVertical_bias="0.0" />
 
-	<TextView
-			android:id="@+id/date_tv"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="8dp"
-			android:fontFamily="@font/josefin_sans"
-			android:textSize="16sp"
-			app:layout_constraintStart_toStartOf="@+id/movie_overview"
-			app:layout_constraintTop_toBottomOf="@+id/movie_overview" />
-
-	<com.google.android.material.chip.ChipGroup
-			android:id="@+id/genres_holder"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="8dp"
-			android:layout_marginTop="16dp"
-			android:layout_marginEnd="8dp"
-			app:chipSpacingHorizontal="8dp"
-			app:chipSpacingVertical="4dp"
-			app:layout_constraintEnd_toStartOf="@+id/rating_tv"
-			app:layout_constraintStart_toStartOf="@+id/ver_content_guide"
-			app:layout_constraintTop_toBottomOf="@+id/date_tv"
-			app:singleSelection="true" />
+		<androidx.constraintlayout.widget.Barrier
+				android:id="@+id/ratings_barrier"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:barrierDirection="end"
+				app:constraint_referenced_ids="ratings" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+		<TextView
+				android:id="@+id/ratings"
+				android:layout_width="@dimen/ratings_square_size"
+				android:layout_height="@dimen/ratings_square_size"
+				android:background="@color/colorPrimary"
+				android:contentDescription="@string/movie_ratings"
+				android:fontFamily="@font/josefin_sans_bold"
+				android:gravity="center"
+				android:scaleType="centerCrop"
+				android:textAlignment="center"
+				android:textColor="@color/colorSecondary"
+				android:textSize="@dimen/font_size_18sp"
+				android:textStyle="bold"
+				android:typeface="sans"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.95"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/movie_overview"
+				tools:layout_height="@dimen/ratings_square_size"
+				tools:layout_width="@dimen/ratings_square_size"
+				tools:text="@string/tools_ratings_text_value" />
+
+		<TextView
+				android:id="@+id/rating_tv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/rating_tv_marginTop_portrait"
+				android:fontFamily="@font/josefin_sans_semibold"
+				android:text="@string/ratings_text"
+				android:textSize="@dimen/font_size_12sp"
+				app:layout_constraintEnd_toEndOf="@+id/ratings"
+				app:layout_constraintStart_toStartOf="@+id/ratings"
+				app:layout_constraintTop_toBottomOf="@+id/ratings" />
+
+		<TextView
+				android:id="@+id/date_tv"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/date_tv_marginTop_portrait"
+				android:fontFamily="@font/josefin_sans"
+				android:textSize="@dimen/font_size_16sp"
+				app:layout_constraintStart_toStartOf="@+id/movie_overview"
+				app:layout_constraintTop_toBottomOf="@+id/movie_overview" />
+
+		<com.google.android.material.chip.ChipGroup
+				android:id="@+id/genres_holder"
+				android:layout_width="@dimen/match_constraints"
+				android:layout_height="wrap_content"
+				android:layout_marginHorizontal="@dimen/genres_chipgroup_h_margin_portrait"
+				android:layout_marginTop="@dimen/genres_chipgroup_marginTop_portrait"
+				app:chipSpacingHorizontal="@dimen/genres_chipgroup_h_spacing_portrait"
+				app:chipSpacingVertical="@dimen/genres_chipgroup_v_spacing_portrait"
+				app:layout_constraintEnd_toStartOf="@+id/rating_tv"
+				app:layout_constraintStart_toStartOf="@+id/ver_content_guide"
+				app:layout_constraintTop_toBottomOf="@+id/date_tv"
+				app:singleSelection="true" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+	<include layout="@layout/reviews_bottomsheet" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

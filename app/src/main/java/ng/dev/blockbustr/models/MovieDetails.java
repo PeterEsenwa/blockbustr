@@ -1,5 +1,10 @@
 package ng.dev.blockbustr.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,44 +14,45 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+@Entity(tableName = "favourites")
 public class MovieDetails {
+    private final List<Genre> genres = new ArrayList<>();
+    @Ignore
+    public ArrayList<MovieVideo> videos = new ArrayList<>();
+
+    @Ignore
+    public ArrayList<MovieReview> reviews = new ArrayList<>();
+    @Ignore
+    public boolean previouslyClicked;
+    private String title;
+    private String overview;
+    private Double popularity;
+    @PrimaryKey
+    private Integer id;
+    @ColumnInfo(name = "original_title")
+    private String originalTitle;
+    @ColumnInfo(name = "vote_count")
+    private Integer voteCount;
+    @ColumnInfo(name = "vote_average")
+    private Integer voteAverage;
+    @ColumnInfo(name = "poster_path")
+    private String posterPath;
+    @ColumnInfo(name = "backdrop_path")
+    private String backdropPath;
+    @ColumnInfo(name = "release_date")
+    private Date releaseDate;
 
     public MovieDetails() {
     }
 
-    private ArrayList<Genre> genres = new ArrayList<>();
-
-    private Integer id;
-    private String originalTitle;
-    private String title;
-    private String overview;
-    private Double popularity;
-    private Integer voteCount;
-    private Integer voteAverage;
-    private String posterPath;
-    private String backdropPath;
-    private Date releaseDate;
-    private String originalLanguage;
-
-    public MovieDetails(Integer id, String originalTitle, String title, String overview, Double popularity,
-                        Integer voteCount, Integer voteAverage, String posterPath, String backdropPath,
-                        String releaseDate, String originalLanguage) throws ParseException {
-        this.id = id;
-        this.originalTitle = originalTitle;
-        this.title = title;
-        this.overview = overview;
-        this.popularity = popularity;
-        this.voteCount = voteCount;
-        this.voteAverage = voteAverage;
-        this.posterPath = posterPath;
-        this.backdropPath = backdropPath;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        this.releaseDate = dateFormat.parse(releaseDate);
-        this.originalLanguage = originalLanguage;
+    public static Comparator<MovieDetails> releaseDateComparator() {
+        return (movieOne, movieTwo) -> {
+            if (movieOne == null || movieTwo == null || movieOne.getReleaseDate() == null || movieTwo.getReleaseDate() == null) {
+                return 0;
+            }
+            return movieTwo.getReleaseDate().compareTo(movieOne.getReleaseDate());
+        };
     }
-//    private Boolean video;
-//    private Boolean adult;
-//    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public Double getPopularity() {
         return popularity;
@@ -86,14 +92,6 @@ public class MovieDetails {
 
     public void setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
-    }
-
-    public String getOriginalLanguage() {
-        return originalLanguage;
-    }
-
-    public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
     }
 
     public String getOriginalTitle() {
@@ -137,38 +135,22 @@ public class MovieDetails {
         this.releaseDate = dateFormat.parse(releaseDate);
     }
 
-    public static Comparator<MovieDetails> releaseDateComparator() {
-        return (movieOne, movieTwo) -> {
-            if (movieOne == null || movieTwo == null || movieOne.getReleaseDate() == null || movieTwo.getReleaseDate() == null) {
-                return 0;
-            }
-            return movieTwo.getReleaseDate().compareTo(movieOne.getReleaseDate());
-        };
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
-    public static Comparator<MovieDetails> ratingsComparator() {
-        return (movieOne, movieTwo) -> {
-            if (movieOne == null || movieTwo == null || movieOne.getVoteAverage() == null || movieTwo.getVoteAverage() == null) {
-                return 0;
-            }
-            return movieTwo.getVoteAverage().compareTo(movieOne.getVoteAverage());
-        };
-    }
-
-    public ArrayList<Genre> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Integer> genreIds) {
+    public void setGenres(List<Genre> genres) {
+        this.genres.addAll(genres);
+    }
+
+    public void setGenresInt(List<Integer> genreIds) {
         for (Integer genreId : genreIds) {
             Genre g = Genre.allGenres.get(Genre.allGenres.indexOf(new Genre(genreId, "")));
             this.genres.add(g);
         }
     }
-
-//    static Comparator<MovieDetails> getAttribute2Comparator() {
-//        return new Comparator<MovieDetails>() {
-//            // compare using attribute 2
-//        };
-//    }
 }

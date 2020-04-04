@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import ng.dev.blockbustr.R;
 import ng.dev.blockbustr.misc.MoviesAdapter;
 import ng.dev.blockbustr.models.MovieDetails;
+import ng.dev.blockbustr.utils.MiscUtils;
 
 public class TopRatedFragment extends Fragment {
 
@@ -29,11 +31,12 @@ public class TopRatedFragment extends Fragment {
         TopRatedViewModel topRatedViewModel = new ViewModelProvider(this).get(TopRatedViewModel.class);
         View root = inflater.inflate(R.layout.fragment_top_rated, container, false);
 
+        int spanCount = MiscUtils.calculateNoOfColumns(Objects.requireNonNull(getContext()));
         RecyclerView recyclerView = root.findViewById(R.id.top_rated_movies_rv);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), spanCount);
 
         ArrayList<MovieDetails> movies = new ArrayList<>();
-        moviesAdapter = new MoviesAdapter(movies);
+        moviesAdapter = new MoviesAdapter(movies, spanCount);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(moviesAdapter);

@@ -27,8 +27,8 @@ public class MostViewedViewModel extends AndroidViewModel {
 
     public MostViewedViewModel(@NonNull Application application) {
         super(application);
-        mostViewedApiURL = getApplication().getResources().getString(R.string.most_viewed_api_url);
-        apiKey = getApplication().getResources().getString(R.string.api_key);
+        mostViewedApiURL = application.getString(R.string.most_viewed_api_url);
+        apiKey = application.getString(R.string.api_key);
     }
 
     LiveData<ArrayList<MovieDetails>> getMovies() {
@@ -61,7 +61,7 @@ public class MostViewedViewModel extends AndroidViewModel {
                     return tempMovies;
                 }
 
-                JSONArray respMovies = JsonUtils.getMoviesArray(responseBody);
+                JSONArray respMovies = JsonUtils.getTMDB_ResponseArray(responseBody);
 
                 for (int i = 0; i < respMovies.length(); i++) {
                     tempMovies.add(JsonUtils.parseMovieDetails(respMovies.getJSONObject(i)));

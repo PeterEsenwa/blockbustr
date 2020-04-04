@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import ng.dev.blockbustr.MainActivity;
 import ng.dev.blockbustr.R;
@@ -27,9 +28,17 @@ import ng.dev.blockbustr.ui.movie_details.MovieDetailsViewModel;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
     final private ArrayList<MovieDetails> movies;
+    private final int spanCount;
 
-    public MoviesAdapter(ArrayList<MovieDetails> movies) {
+    public MoviesAdapter(ArrayList<MovieDetails> movies, int spanCount) {
         this.movies = movies;
+        this.spanCount = spanCount;
+    }
+
+    public void setMovies(List<MovieDetails> movies) {
+        this.movies.clear();
+        this.movies.addAll(movies);
+        this.notifyDataSetChanged();
     }
 
     @NonNull
@@ -47,21 +56,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         int topDownPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8.5f,
                 holder.constraintLayout.getResources().getDisplayMetrics());
 
-        int column = position % 2;
-        int right = 0;
-        int left = 0;
+        int right;
+        int left;
         int top = 0;
         int bottom = 0;
 
-        if (column == 0) {
-            right = leftRightPadding;
-        }
+        right = leftRightPadding / 2;
+        left = leftRightPadding / 2;
 
-        if (column == 1) {
-            left = leftRightPadding;
-        }
-
-        if (position > 1) {
+        if (position > spanCount - 1) {
             top = topDownPadding;
         }
 
@@ -91,16 +94,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
 
         notifyDataSetChanged();
     }
-
-//    public void sortByRatings() {
-//        ArrayList<MovieDetails> tempMovies = new ArrayList<>(movies);
-//        Collections.sort(tempMovies, MovieDetails.ratingsComparator());
-//
-//        movies.clear();
-//        movies.addAll(tempMovies);
-//
-//        notifyDataSetChanged();
-//    }
 
     static class MoviesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final ConstraintLayout constraintLayout;
@@ -139,8 +132,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
                         navController.navigate(R.id.action_nav_top_rated_to_movie_details);
                         break;
                     }
+                    case (R.id.nav_favourites): {
+                        navController.navigate(R.id.action_nav_favourites_to_nav_movie_details);
+                        break;
+                    }
                 }
+            }
 
+            if (!movie.previouslyClicked) {
+                movie.previouslyClicked = true;
             }
         }
     }

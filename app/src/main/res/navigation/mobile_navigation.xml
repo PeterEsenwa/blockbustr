@@ -17,6 +17,13 @@
 				app:exitAnim="@anim/slide_out_left"
 				app:popEnterAnim="@anim/slide_in_left"
 				app:popExitAnim="@anim/slide_out_right" />
+		<action
+				android:id="@+id/action_nav_top_rated_to_nav_favourites"
+				app:destination="@id/nav_favourites"
+				app:enterAnim="@anim/slide_in_right"
+				app:exitAnim="@anim/slide_out_left"
+				app:popEnterAnim="@anim/slide_in_left"
+				app:popExitAnim="@anim/slide_out_right" />
 	</fragment>
 
 	<fragment
@@ -27,6 +34,13 @@
 		<action
 				android:id="@+id/action_nav_most_viewed_to_movie_details"
 				app:destination="@id/nav_movie_details"
+				app:enterAnim="@anim/slide_in_right"
+				app:exitAnim="@anim/slide_out_left"
+				app:popEnterAnim="@anim/slide_in_left"
+				app:popExitAnim="@anim/slide_out_right" />
+		<action
+				android:id="@+id/action_nav_most_viewed_to_nav_favourites"
+				app:destination="@id/nav_favourites"
 				app:enterAnim="@anim/slide_in_right"
 				app:exitAnim="@anim/slide_out_left"
 				app:popEnterAnim="@anim/slide_in_left"
@@ -45,6 +59,27 @@
 				app:exitAnim="@anim/slide_out_left"
 				app:popEnterAnim="@anim/slide_in_left"
 				app:popExitAnim="@anim/slide_out_right" />
+		<action
+				android:id="@+id/action_nav_now_showing_to_nav_favourites"
+				app:destination="@id/nav_favourites"
+				app:enterAnim="@anim/slide_in_right"
+				app:exitAnim="@anim/slide_out_left"
+				app:popEnterAnim="@anim/slide_in_left"
+				app:popExitAnim="@anim/slide_out_right" />
+	</fragment>
+
+	<fragment
+			android:id="@+id/nav_favourites"
+			android:name="ng.dev.blockbustr.ui.favourites.FavouritesFragment"
+			tools:layout="@layout/fragment_most_viewed">
+
+		<action
+				android:id="@+id/action_nav_favourites_to_nav_movie_details"
+				app:destination="@id/nav_movie_details"
+				app:enterAnim="@anim/slide_in_right"
+				app:exitAnim="@anim/slide_out_left"
+				app:popEnterAnim="@anim/slide_in_left"
+				app:popExitAnim="@anim/slide_out_right" />
 	</fragment>
 
 	<fragment
@@ -55,4 +90,5 @@
 				android:id="@+id/action_nav_movie_details_to_nav_most_viewed"
 				app:destination="@id/nav_most_viewed" />
 	</fragment>
+
 </navigation>

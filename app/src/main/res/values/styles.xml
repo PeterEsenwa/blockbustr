@@ -15,6 +15,7 @@
 		<item name="background">@color/colorSecondary</item>
 		<item name="titleTextStyle">@style/MyActionBarTitle</item>
 		<item name="elevation">0dp</item>
+		<item name="layout_scrollFlags">scroll|enterAlways</item>
 	</style>
 
 	<style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">

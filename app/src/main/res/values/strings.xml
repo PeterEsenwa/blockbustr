@@ -1,17 +1,23 @@
 <resources>
 	<string name="app_name">BlockBustr</string>
+	<string name="title_favourites">My Favourites</string>
 	<string name="title_top_rated">Top Rated</string>
 	<string name="title_most_viewed">Popular</string>
 	<string name="title_now_showing">Now Showing</string>
 	<string name="movie_poster">movie poster</string>
-	<string name="sort_by_date">Sort by Date</string>
+	<string name="sort_by_date">Sort by Release date</string>
 	<string name="movie_ratings">movie ratings</string>
 	<string name="ratings_text">RATINGS</string>
 	<string name="release_date">Released: %s</string>
-	<!--	insert a theMovieDB api key here   --><!--	TODO: Insert api_key-->
-	<string name="api_key">12f065928e6fa02c8db32b3c15005d1c</string>
+	<!--	insert a theMovieDB api url here   -->
+	<string name="api_key"><!--	TODO: Insert api_key--></string>
+	<string name="movie_videos_api_url"><![CDATA[https://api.themoviedb.org/3/movie/%s/videos?api_key=%s&language=en-US]]></string>
+	<string name="movie_reviews_api_url"><![CDATA[https://api.themoviedb.org/3/movie/%s/reviews?api_key=%s&language=en-US]]></string>
 	<string name="most_viewed_api_url"><![CDATA[https://api.themoviedb.org/3/movie/popular?api_key=%s&language=en-US&page=1]]></string>
 	<string name="now_playing_api_url"><![CDATA[https://api.themoviedb.org/3/movie/now_playing?api_key=%s&language=en-US&page=1]]></string>
 	<string name="top_rated_api_url"><![CDATA[https://api.themoviedb.org/3/movie/top_rated?api_key=%s&language=en-US&page=1]]></string>
 	<string name="watch_trailer">Watch Trailer</string>
+	<string name="tools_ratings_text_value">7</string>
+	<string name="add_to_favorites">Add to Favorites</string>
+	<string name="reviews_text">Reviews</string>
 </resources>
